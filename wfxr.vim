@@ -1,0 +1,1079 @@
+" vim: ft=vim nowrap:
+scriptencoding utf-8
+
+" Auto install vim-plug {{{ "
+" if empty(glob('~/.vim/autoload/plug.vim'))
+"     !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"     " if v:shell_error != 0 | exit | endif
+"   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" endif
+" }}} Auto install vim-plug "
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'wfxr/minimap.vim'
+let g:minimap_width = 10
+let g:minimap_highlight = 'MinimapCurrentLine'
+let g:minimap_auto_start = 1
+Plug 'jamessan/vim-gnupg' | let g:GPGFilePattern = '*.{gpg,asc,pgp,pvt}'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'machakann/vim-highlightedyank' | let g:highlightedyank_highlight_duration = 100
+Plug 'rhysd/git-messenger.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'honza/vim-snippets'
+Plug 'ron89/thesaurus_query.vim'
+Plug 'terryma/vim-multiple-cursors' | let g:multi_cursor_select_all_word_key = '<A-a>'
+Plug 'wfxr/vim-gitignore'
+Plug 'junegunn/vim-peekaboo'
+Plug 'ntpeters/vim-better-whitespace'
+let g:better_whitespace_ctermcolor='Red'
+let g:better_whitespace_guicolor='#fb4934'
+let g:current_line_whitespace_disabled_hard=1
+let g:better_whitespace_filetypes_blacklist=['minimap', 'diff']
+Plug 'vim-scripts/matchit.zip' " Enhance % match
+Plug 'neoclide/jsonc.vim'
+Plug 'mbbill/undotree', { 'on':  'UndotreeToggle' } | nnoremap U :UndotreeToggle<CR>
+Plug 'mattn/vim-xxdcursor'       | Plug 'fidian/hexmode'     | let g:hexmode_patterns = '*.o,*.so,*.a,*.out,*.bin,*.exe'
+Plug 'vim-utils/vim-husk'        | Plug 'tpope/vim-rsi' " Eamcs-Style keymapping
+Plug 'mattn/vim-fixedsearch'     | Plug 'mattn/vim-prompter' | nmap <Leader>/ <plug>(fixedsearch)
+Plug 'junegunn/vim-after-object' | autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ', ',')
+Plug 'junegunn/goyo.vim'         | nnoremap <Leader>G :Goyo<CR>
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
+Plug 'glts/vim-textobj-comment'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-repeat'
+Plug 'mattn/vim-textobj-url'
+Plug 'ConradIrwin/vim-bracketed-paste' " Auto toggle paste mode when paste
+
+" Plug 'junegunn/gv.vim'
+" Plug 'rhysd/github-complete.vim'
+" Plug 'wellle/visual-split.vim'
+" Plug 'lifepillar/vim-cheat40' " Keymapping: <leader>?
+" Plug 'wakatime/vim-wakatime'
+" Plug 'junegunn/vim-github-dashboard' | let g:github_dashboard = { 'username': 'wfxr' }
+
+" Themes
+Plug 'nightsense/snow'
+Plug 'junegunn/seoul256.vim'
+let g:gruvbox_bold = 1
+let g:gruvbox_italic = 1
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_invert_selection = 0
+let g:gruvbox_sign_column = 'bg0'
+Plug 'morhetz/gruvbox'
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_enable_italic = 1
+" let g:gruvbox_material_transparent_background = 1
+let g:gruvbox_material_current_word = 'grey background'
+let g:gruvbox_material_visual = 'grey background'
+" let g:gruvbox_material_diagnostic_line_highlight = 1
+" let g:gruvbox_material_palette = 'material'
+let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_palette = {
+            \ 'bg0':              ['#282828', '235'],
+            \ 'bg1':              ['#32302f', '236'],
+            \ 'bg2':              ['#32302f', '236'],
+            \ 'bg3':              ['#45403d', '237'],
+            \ 'bg4':              ['#45403d', '237'],
+            \ 'bg5':              ['#5a524c', '239'],
+            \ 'bg_statusline1':   ['#32302f', '236'],
+            \ 'bg_statusline2':   ['#3a3735', '236'],
+            \ 'bg_statusline3':   ['#504945', '240'],
+            \ 'bg_diff_green':    ['#34381b', '22'],
+            \ 'bg_visual_green':  ['#3b4439', '22'],
+            \ 'bg_diff_red':      ['#402120', '52'],
+            \ 'bg_visual_red':    ['#4c3432', '52'],
+            \ 'bg_diff_blue':     ['#0e363e', '17'],
+            \ 'bg_visual_blue':   ['#374141', '17'],
+            \ 'bg_visual_yellow': ['#4f422e', '94'],
+            \ 'bg_current_word':  ['#2e3b3b', '237'],
+            \ 'fg0':              ['#d4be98', '223'],
+            \ 'fg1':              ['#ddc7a1', '223'],
+            \ 'red':              ['#ea6962', '167'],
+            \ 'orange':           ['#e78a4e', '208'],
+            \ 'yellow':           ['#d8a657', '214'],
+            \ 'green':            ['#a9b665', '142'],
+            \ 'aqua':             ['#89b482', '108'],
+            \ 'blue':             ['#7daea3', '109'],
+            \ 'purple':           ['#d3869b', '175'],
+            \ 'bg_red':           ['#ea6962', '167'],
+            \ 'bg_green':         ['#a9b665', '142'],
+            \ 'bg_yellow':        ['#d8a657', '214'],
+            \ 'grey0':            ['#7c6f64', '243'],
+            \ 'grey1':            ['#928374', '245'],
+            \ 'grey2':            ['#a89984', '246'],
+            \ 'none':             ['NONE',    'NONE']
+            \ }
+Plug 'sainnhe/gruvbox-material'
+
+" scrollbar {{{ "
+" if has('nvim')
+"     Plug 'Xuyuanp/scrollbar.nvim'
+"     if has_key(g:plugs, 'scrollbar.nvim')
+"         let g:scrollbar_right_offset = 0
+"         " ⎛╭╮┃█
+"         " ⎜││┃█
+"         " ⎝╰╯┃█
+"         let g:scrollbar_shape = {
+"                     \ 'head': '┃',
+"                     \ 'body': '┃',
+"                     \ 'tail': '┃',
+"                     \ }
+"         let g:scrollbar_highlight = {
+"                     \ 'head': 'LineNr',
+"                     \ 'body': 'LineNr',
+"                     \ 'tail': 'LineNr',
+"                     \ }
+"         augroup ScrollbarInit
+"             autocmd!
+"             autocmd WinEnter,FocusGained,CursorMoved,VimResized * silent! lua require('scrollbar').show()
+"             autocmd WinLeave,FocusLost                          * silent! lua require('scrollbar').clear()
+"         augroup end
+"     endif
+" endif
+" }}} scrollbar "
+
+" vim-rooter {{{ "
+Plug 'airblade/vim-rooter'
+let g:rooter_resolve_links = 1
+" }}} vim-rooter "
+
+" rhysd/committia.vim {{{ "
+" Plug 'rhysd/committia.vim'
+" let g:committia_min_window_width = 150
+" let g:committia_hooks = {}
+" function! g:committia_hooks.edit_open(info)
+    " " Additional settings
+    " setlocal spell
+    " " If no commit message, start with insert mode
+    " if a:info.vcs ==# 'git' && getline(1) ==# ''
+        " startinsert
+    " endif
+" endfunction
+" }}} rhysd/committia "
+
+" vim-key-sound {{{ "
+" Plug 'skywind3000/vim-keysound'
+" let g:keysound_theme = 'default'
+" let g:keysound_volume = 1000
+" noremap <leader>K :KeysoundToggle<CR>
+" }}} vim-key-sound "
+
+" auto-pairs {{{ "
+Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsMultilineClose = 0
+let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsShortcutJump = ''
+let g:AutoPairsShortcutFastWrap = ''
+let g:AutoPairsShortcutBackInsert = ''
+" }}} auto-pairs "
+
+" splitjoin {{{ "
+Plug 'AndrewRadev/splitjoin.vim'
+let g:splitjoin_split_mapping = ''
+let g:splitjoin_join_mapping = ''
+nnoremap gss :SplitjoinSplit<cr>
+nnoremap gsj :SplitjoinJoin<cr>
+" }}} splitjoin "
+
+" limelight {{{ "
+Plug 'junegunn/limelight.vim'
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_paragraph_span = 1
+let g:limelight_priority = -1
+function! s:goyo_enter()
+    silent :execute 'normal! mL'
+    if exists('$TMUX')
+        silent !tmux set status off
+    endif
+    setl foldlevel=99
+    setl nowrap
+    setl nocursorline
+    let &background = &background
+    Limelight
+    let &l:statusline = '%M'
+    hi StatusLine ctermfg=red guifg=red cterm=NONE gui=NONE
+endfunction
+function! s:goyo_leave()
+    if exists('$TMUX')
+        silent !tmux set status on
+    endif
+    Limelight!
+    let &background = &background
+    hi VertSplit ctermbg=NONE guibg=NONE
+    hi Normal    ctermbg=NONE guibg=NONE
+    silent :execute 'normal! `L'
+endfunction
+
+augroup goyo
+    au!
+    au! User GoyoEnter nested call <SID>goyo_enter()
+    au! User GoyoLeave nested call <SID>goyo_leave()
+augroup END
+
+nnoremap <silent> <Leader>L :Limelight!!<cr>
+" }}} limelight "
+
+" vim-move {{{ "
+Plug 'matze/vim-move'
+let g:move_map_keys = 0
+vmap <c-a-j> <Plug>MoveBlockDown
+vmap <c-a-k> <Plug>MoveBlockUp
+nmap <c-a-j> <Plug>MoveLineDown
+nmap <c-a-k> <Plug>MoveLineUp
+" }}} vim-move "
+
+" vim-signify {{{ "
+Plug 'mhinz/vim-signify' " show vcs symbol on the left side
+let vcs_signs_delete_up   = [ '⤤', '◥', '⥔', '⬈', '⇗', '↗', '⎺']
+let vcs_signs_delete_down = [ '⤥', '◢', '⥕', '⬊', '⇘', '↘', '⎽']
+let g:signify_sign_add               = '┃'
+let g:signify_sign_change            = '┃'
+let g:signify_sign_changedelete      = '┃'
+let g:signify_sign_delete            = vcs_signs_delete_down[0]
+let g:signify_sign_delete_first_line = vcs_signs_delete_up[0]
+" Plug 'airblade/vim-gitgutter'
+" let g:gitgutter_sign_added='┃'
+" let g:gitgutter_sign_modified='┃'
+" let g:gitgutter_sign_removed='◢'
+" let g:gitgutter_sign_removed_first_line='◥'
+" let g:gitgutter_sign_modified_removed='◢'
+" }}} vim-signify "
+
+" tags {{{ "
+if executable('ctags')
+    Plug 'ludovicchabant/vim-gutentags'
+    " let g:gutentags_trace = 1
+    let g:gutentags_modules = ['ctags']
+    let g:gutentags_project_root = ['.git']
+    let g:gutentags_ctags_tagfile = '.tags'
+    let g:gutentags_cache_dir = expand('~/.cache/tags')
+    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+    Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+    let g:tagbar_autofocus = 0
+    let g:tagbar_sort = 0
+    nmap <a-\> :TagbarToggle<CR>
+
+    " Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
+    " nmap <a-\> :Vista!!<CR>
+    " let g:vista_fzf_preview = ['right:50%']
+    " let g:vista#renderer#enable_icon = 1
+endif
+" }}} tagbar "
+
+" tpope/vim-sensible {{{ "
+if !has('nvim')
+    Plug 'tpope/vim-sensible' " no nead for nvim
+endif
+" }}} tpope/vim-sensible "
+
+" kristijanhusak/vim-carbon-now-sh {{{ "
+" Plugin for opening selected content in https://carbon.now.sh.
+Plug 'kristijanhusak/vim-carbon-now-sh'
+"command! -range=% Snapshot CarbonNowSh
+"cabbrev Snapshot CarbonNowSh
+" }}} kristijanhusak/vim-carbon-now-sh "
+
+" itchyny/calendar.vim {{{ "
+" Wonderfun calendar plugin
+"Plug 'itchyny/calendar.vim'
+"let g:calendar_google_calendar = 1
+"let g:calendar_google_task = 1
+" }}} itchyny/calendar.vim "
+
+" comfortable-motion.vim {{{ "
+Plug 'yuttie/comfortable-motion.vim'
+let g:comfortable_motion_no_default_key_mappings = 1
+let g:comfortable_motion_scroll_down_key = 'j'
+let g:comfortable_motion_scroll_up_key = 'k'
+nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
+" }}} comfortable-motion.vim "
+
+" terryma/vim-smooth-scroll {{{ "
+" Plug 'terryma/vim-smooth-scroll'
+" noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 20, 2)<CR>
+" noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
+" noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+" noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+" }}} terryma/vim-smooth-scroll "
+
+" vim-expand-region {{{ "
+Plug 'terryma/vim-expand-region'
+nmap + <Plug>(expand_region_expand)
+vmap + <Plug>(expand_region_expand)
+vmap - <Plug>(expand_region_shrink)
+" }}} vim-expand-region "
+
+" vim-easy-align {{{ "
+Plug 'junegunn/vim-easy-align'
+let g:easy_align_delimiters = {
+            \ '>': { 'pattern': '>>\|=>\|>' },
+            \ '\': { 'pattern': '\\' },
+            \ '/': { 'pattern': '//\+\|/\*\|\*/', 'delimiter_align': 'l', 'ignore_groups': ['!Comment'] },
+            \ ']': {
+            \     'pattern':       '\]\zs',
+            \     'left_margin':   0,
+            \     'right_margin':  1,
+            \     'stick_to_left': 0
+            \   },
+            \ ')': {
+            \     'pattern':       ')\zs',
+            \     'left_margin':   0,
+            \     'right_margin':  1,
+            \     'stick_to_left': 0
+            \   },
+            \ 'f': {
+            \     'pattern': ' \(\S\+(\)\@=',
+            \     'left_margin': 0,
+            \     'right_margin': 0
+            \   },
+            \ 'd': {
+            \     'pattern': ' \ze\S\+\s*[;=]',
+            \     'left_margin': 0,
+            \     'right_margin': 0
+            \   }
+            \ }
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+xmap <leader>ga <Plug>(LiveEasyAlign)
+" }}} vim-easy-align "
+
+" vim-fugitive {{{ "
+Plug 'tpope/vim-fugitive'
+nmap [q :cprev<CR>
+nmap ]q :cnext<CR>
+nmap [Q :cfirst<CR>
+nmap ]Q :clast<CR>
+nmap <Leader>d :Gdiff<CR>
+" }}} vim-fugitive "
+
+" vim-slash {{{ "
+" ISSUE: vim-splash causes `gd` not work
+Plug 'junegunn/vim-slash' " vim-slash provides a set of mappings for enhancing in-buffer search experience in Vim.
+if has('timers')
+  " Blink 3 times with 50ms interval
+  " noremap <expr> <plug>(slash-after) 'zz'.slash#blink(2, 50)
+  noremap <expr> <plug>(slash-after) slash#blink(2, 50)
+endif
+" }}} vim-slash "
+
+" ryanoasis/vim-devicons {{{ "
+" Plug 'ryanoasis/vim-devicons' " Should be loaded before vim-airline
+" let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols = {} " needed
+" let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ''
+" let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*vim_.*\|.*vimrc.*'] = ''
+" let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*zsh_.*\|.*zshrc.*'] = ''
+" }}} ryanoasis/vim-devicons "
+
+" vim-airline / lightline.vim {{{ "
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme = 'gruvbox_material'
+let g:airline_extensions = ['tabline', 'branch', 'ale']
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#ale#error_symbol = 'E:'
+let g:airline#extensions#ale#warning_symbol = 'W:'
+let g:airline#extensions#ale#show_line_numbers = 0
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_alt_sep = ''
+" }}} vim-airline/vim-airline "
+
+" scrooloose/nerdtree {{{ "
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } | Plug 'Xuyuanp/nerdtree-git-plugin'
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeMapActivateNode = '<CR>'
+let g:NERDTreeMapCustomOpen = 'o'
+let g:NERDTreeCustomOpenArgs ={'file': {'reuse':'currenttab', 'where':'p', 'keepopen':1, 'stay':1}}
+nmap <C-\> :NERDTreeToggle<CR>
+let g:NERDTreeIgnore = ['^target$', '^build$']
+" Quit when nerdtree is the only buffer
+augroup nerdtree
+    au!
+    au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
+" }}} scrooloose/nerdtree "
+
+" mhinz/vim-startify {{{ "
+Plug 'mhinz/vim-startify'
+" Shot nerdtree when start vim without argument
+" autocmd VimEnter *
+            " \ if !argc()
+            " \ |   Startify
+            " \ |   NERDTree
+            " \ |   wincmd w
+            " \ | endif
+" }}} mhinz/vim-startify "
+
+" AndrewRadev/switch.vim {{{ "
+Plug 'AndrewRadev/switch.vim'
+" gs/gr to switch or switch reverse
+let g:switch_mapping = '-'
+let g:switch_reverse_mapping = '_'
+" }}} AndrewRadev/switch.vim "
+
+" scrooloose/nerdcommenter {{{ "
+" Plug 'tpope/vim-commentary'
+Plug 'scrooloose/nerdcommenter'
+let NERDSpaceDelims = 1
+let g:NERDCreateDefaultMappings = 0
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDDefaultAlign = 'left'
+" For some reason, vim registers <C-/> as <C-_>
+nnoremap <c-_> :call NERDComment(0, "toggle")<CR>j
+vnoremap <c-_> :call NERDComment(0, "toggle")<CR>'>j
+" Copy & comment
+nmap <leader>cc yyP<c-_>
+vmap <leader>cc yPgp<c-_>
+" }}} scrooloose/nerdcommenter "
+
+" ListToggle {{{ "
+" Plug 'Valloric/ListToggle'
+" let g:lt_height = 10
+" let g:lt_location_list_toggle_map = '<leader>1'
+" let g:lt_quickfix_list_toggle_map = '<leader>2'
+" }}} ListToggle "
+
+" Yggdroot/indentLine {{{ "
+Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesToggle' }
+let g:indentLine_enabled = 0
+" autocmd Filetype *yaml,*xml,c,cpp,go,rust,java let g:indentLine_enabled = 1
+augroup indentline
+    au!
+    au Filetype json,markdown let g:indentLine_setConceal = 0
+augroup END
+let g:indentLine_char = '│'
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#4E4E4E'
+map <leader>il :IndentLinesToggle<CR>
+" }}} Yggdroot/indentLine "
+
+" junegunn/fzf {{{ "
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } | Plug 'junegunn/fzf.vim'
+let g:fzf_vim_opts = {'options': ['--no-border']} " custom
+let g:fzf_action = {
+            \ 'alt-v':  'vsplit',
+            \ 'alt-t':  'nabnew',
+            \ 'alt-x':  'split',
+            \ 'ctrl-m': 'edit',
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
+let g:fzf_buffers_jump = 1
+nmap <a-f> :Files<CR>
+nmap <a-b> :Buffers<CR>
+nmap <a-g> :Rg<CR>
+nmap <a-l> :Lines<CR>
+" Mapping selecting mappings
+nmap <c-l>m <plug>(fzf-maps-n)
+xmap <c-l>m <plug>(fzf-maps-x)
+imap <c-l>m <plug>(fzf-maps-i)
+omap <c-l>m <plug>(fzf-maps-o)
+" Insert mode completion
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+" Lookup dictionary with translate
+
+inoremap <expr> <c-x><c-d> fzf#complete({
+            \ 'source': 'cat ~/.vim/spell/en.utf-8.add /usr/share/dict/words 2>/dev/null',
+            \ 'options': '--no-border --preview="ydcv --color=always {}" --preview-window=right:70%',
+            \ 'window': 'call FloatingFZF()'})
+augroup fzf_gitcommit
+    au!
+    au Filetype gitcommit inoremap <expr> <c-x><c-x> fzf#complete({
+                \ 'source': 'git log --pretty=format:"%s"',
+                \ 'options': '--no-border --preview="ydcv --color=always {}" --preview-window=bottom:20%',
+                \ 'window': 'call FloatingFZF()'})
+augroup END
+
+" Override default command
+command! -bang Colors
+            \ call fzf#vim#colors(g:fzf_vim_opts, <bang>0)
+command! -bang -nargs=? -complete=dir Files
+            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(g:fzf_vim_opts, 'right:60%'), <bang>0)
+command! -bang Buffers
+            \ call fzf#vim#buffers(fzf#vim#with_preview(g:fzf_vim_opts, 'right:60%'), <bang>0)
+command! -bang -nargs=* Rg
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+            \   fzf#vim#with_preview(g:fzf_vim_opts, 'right:60%'), <bang>0)
+
+if has('nvim')
+  function! s:create_float(hl, opts)
+    let buf = nvim_create_buf(v:false, v:true)
+    let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
+    let win = nvim_open_win(buf, v:true, opts)
+    call setwinvar(win, '&winhighlight', 'NormalFloat:'.a:hl)
+    call setwinvar(win, '&colorcolumn', '')
+    return buf
+  endfunction
+
+  function! FloatingFZF()
+    " Size and position
+    let width = float2nr(&columns * 0.9)
+    let height = float2nr(&lines * 0.6)
+    let row = float2nr((&lines - height) / 2)
+    let col = float2nr((&columns - width) / 2)
+
+    " Border
+    let top = '┏━' . repeat('─', width - 4) . '━┓'
+    let mid = '│'  . repeat(' ', width - 2) .  '│'
+    let bot = '┗━' . repeat('─', width - 4) . '━┛'
+    let border = [top] + repeat([mid], height - 2) + [bot]
+
+    " Draw frame
+    let s:frame = s:create_float('Comment', {'row': row, 'col': col, 'width': width, 'height': height})
+    call nvim_buf_set_lines(s:frame, 0, -1, v:true, border)
+
+    " Draw viewport
+    call s:create_float('Normal', {'row': row + 1, 'col': col + 2, 'width': width - 4, 'height': height - 2})
+    augroup fzf_floating
+        au!
+        au BufWipeout <buffer> execute 'bwipeout' s:frame
+    augroup END
+  endfunction
+
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+endif
+" }}} junegunn/fzf "
+
+" sbdchd/neoformat {{{ "
+Plug 'sbdchd/neoformat'
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+" Enable trimming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+let g:neoformat_enabled_proto = [] " horrible using clang-format to format protobuf
+nnoremap <c-a-l> :Neoformat<cr>
+" }}} sbdchd/neoformat "
+
+" ultisnips && vim-snippets {{{ "
+Plug 'SirVer/ultisnips'
+" Trigger configuration. Do not use <tab> if you use 'YouCompleteMe'
+let g:UltiSnipsExpandTrigger='<leader><tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit='horizontal'
+" autocmd Filetype snippet set shiftwidth=4
+" }}} ultisnips && vim-snippets "
+
+" ale {{{ "
+" Best lint engine(require neovim or vim version > 8)
+let g:error_symbol = '══'
+let g:warning_symbol = '──'
+Plug 'dense-analysis/ale'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_sign_error = g:error_symbol
+let g:ale_sign_warning = g:warning_symbol
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_format = '[%severity%:%code%][%linter%] %s'
+let g:ale_cpp_clang_options = '-Wall -std=c++17'
+let g:ale_cpp_gcc_options = g:ale_cpp_clang_options
+nmap <silent> <a-p> <Plug>(ale_previous_wrap)
+nmap <silent> <a-n> <Plug>(ale_next_wrap)
+" }}} ale "
+
+" echodoc.vim {{{ "
+Plug 'Shougo/echodoc.vim'
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#enable_force_overwrite = 1
+" }}} echodoc.vim "
+
+" coc.vim {{{ "
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
+let g:coc_fzf_opts = ['--no-border', '--layout=reverse-list']
+" let g:coc_fzf_preview = 'right:60%:noborder'
+if has_key(g:plugs, 'coc.nvim')
+    let g:coc_global_extensions = [
+                \ 'coc-marketplace',
+                \ 'coc-snippets',
+                \ 'coc-tabnine',
+                \ 'coc-python',
+                \ 'coc-dictionary',
+                \ 'coc-tag',
+                \ 'coc-emoji',
+                \ 'coc-go',
+                \ 'coc-json',
+                \ 'coc-yaml',
+                \ 'coc-highlight',
+                \ 'coc-rls',
+                \ 'coc-syntax',
+                \ 'coc-fzf-preview',
+                \ 'coc-vimlsp',
+                \ ]
+                " \ 'coc-word',
+
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    " Use tab for trigger completion with characters ahead and navigate.
+    " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+    " inoremap <silent><expr> <TAB>
+                " \ pumvisible() ? "\<C-n>" :
+                " \ <SID>check_back_space() ? "\<TAB>" :
+                " \ coc#refresh()
+    " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    inoremap <silent><expr> <c-space> coc#refresh()
+
+    " Use <tab> to confirm completion
+    inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<tab>"
+
+    " Use K to show documentation in preview window
+    function! s:show_documentation()
+        if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    " Use `[g` and `]g` to navigate diagnostics
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+    " Remap keys for gotos
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    " Remap for rename current word
+    nmap <c-a-r> <Plug>(coc-rename)
+
+    " Remap for format selected region
+    xmap <leader>f <Plug>(coc-format-selected)
+    nmap <leader>f <Plug>(coc-format-selected)
+
+    augroup cocgroup
+        au!
+        " Highlight symbol under cursor on CursorHold
+        au CursorHold * silent call CocActionAsync('highlight')
+        " Setup formatexpr specified filetype(s).
+        au FileType typescript,json setl formatexpr=CocAction('formatSelected')
+        " Update signature help on jump placeholder
+        au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup end
+
+    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+    " Remap for do codeAction of current line
+    nmap <leader>aa  <Plug>(coc-codeaction)
+    " Fix autofix problem of current line
+    nmap <leader>qf  <Plug>(coc-fix-current)
+
+    " Create mappings for function text object, requires document symbols feature of languageserver.
+    xmap if <Plug>(coc-funcobj-i)
+    xmap af <Plug>(coc-funcobj-a)
+    omap if <Plug>(coc-funcobj-i)
+    omap af <Plug>(coc-funcobj-a)
+endif
+" }}} coc.vim "
+
+" YouCompleteMe {{{ "
+" function! BuildYCM(info)
+    " if a:info.status == 'installed' || a:info.force
+        " !./install.py
+    " endif
+" endfunction
+" Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') } | Plug 'rdnetto/YCM-Generator',  { 'branch': 'stable'}
+" " Let ale do it
+" let g:ycm_show_diagnostics_ui = 0
+" let g:ycm_server_log_level = 'info'
+" " 配置默认的ycm_extra_conf.py
+" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+" " 打开vim时不再询问是否加载ycm_extra_conf.py配置
+" let g:ycm_confirm_extra_conf = 0
+" " 注释补全开关
+" let g:ycm_complete_in_comments = 1
+" " 字符串补全开关:关闭会导致在包含双引号形式的头文件时无法补全！
+" let g:ycm_complete_in_strings = 1
+" " 基于标签收集引擎
+" let g:ycm_collect_identifiers_from_tags_files = 1
+" " 基于注释和字符串的收集引擎
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" " 语言关键字补全
+" let g:ycm_seed_identifiers_with_syntax = 1
+" " 从第n个字符开始展开补全
+" let g:ycm_min_num_of_chars_for_completion = 1
+" " 添加UltiSnips进行snippet补全
+" let g:ycm_use_ultisnips_completer = 1
+" " 关闭函数原型等补全预览窗口
+" set completeopt=menu,menuone
+" " 补全完成后关闭预览窗口
+" " let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_add_preview_tocompleteopt = 0
+" let g:ycm_filetype_blacklist = { }
+" " 关闭js文件补全（需要js项目配置文件，类似C++，麻烦）
+" " let g:ycm_filetype_specific_completion_to_disable = {'javascript': 1}
+" let g:ycm_error_symbol = g:error_symbol
+" let g:ycm_warning_symbol = g:warning_symbol
+" let g:ycm_always_populate_location_list = 1
+" " 直接显示补全（全局类型、变量、宏或函数等补全需要
+" let g:ycm_key_invoke_completion = '<C-x><C-o>'
+" " 停止补全
+" let g:ycm_key_list_stop_completion = ['<C-g>']
+" let g:ycm_semantic_triggers =  {
+            " \ 'c,cpp,python,java,go,rust,erlang,perl,cs,lua,javascript': ['re!\w{3}'],
+            " \ 'clojure': ['re!\w{2}[\w/]'],
+            " \ }
+" nmap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" " autocmd FileType c,cpp,cs,python,ruby,java,go,rust,erlang,perl
+            " " \ nmap <buffer> <c-t> <c-o>|
+            " " \ nmap <buffer> <c-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
+            " " \ nmap <buffer> <leader>F :YcmCompleter FixIt<CR>
+" }}} YouCompleteMe "
+
+" vim-easymotion {{{ "
+" Plug 'easymotion/vim-easymotion'
+" let g:EasyMotion_smartcase = 1
+" nmap <Leader>f <Plug>(easymotion-overwin-f)
+" nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" nmap <Leader>l <Plug>(easymotion-overwin-line)
+" nmap <Leader>w <Plug>(easymotion-overwin-w)
+" }}} vim-easymotion "
+
+" vim-sneak {{{ "
+Plug 'justinmk/vim-sneak'
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+" }}} vim-sneak "
+
+" vim-go {{{ "
+Plug 'fatih/vim-go', { 'for': 'go' }
+" If unimported-packages completion not work , run the following command:
+" $ gocode set unimported-packages true
+function! s:build_go_files()
+    let l:file = expand('%')
+    if l:file =~# '^\f\+_test\.go$'
+        call go#test#Test(0, 1)
+    elseif l:file =~# '^\f\+\.go$'
+        call go#cmd#Build(0)
+    endif
+endfunction
+
+augroup go_env
+    autocmd!
+    " Note: Do not change the order!
+    " Note: Do not comment lines inplace
+    let g:go_rename_command = 'gopls'
+    autocmd FileType go
+                \ setl nolist|
+                \ nmap <buffer> <leader>b<CR> :call <SID>build_go_files()<CR>|
+                \ nmap <buffer> <leader>r<CR> <Plug>(go-run)|
+                \ nmap <buffer> <leader>rr    :GoRun %<CR>|
+                \ nmap <buffer> <leader>t<CR> <Plug>(go-test)|
+                \ nmap <buffer> <leader>c<CR> <Plug>(go-coverage-toggle)|
+                \ nmap <buffer> <leader>a <Plug>(go-alternate-edit)|
+                \ nmap <buffer> <leader>i <Plug>(go-info)|
+                \ nmap <buffer> <leader>sm :GoSameIdsToggle<CR>|
+                \ nmap <buffer> <c-a-j> :cnext<CR>|
+                \ nmap <buffer> <c-a-k> :cprevious<CR>|
+                \ nmap <buffer> <c-a-r> <Plug>(go-rename)|
+                \ nmap <buffer> <leader>f :GoDeclsDir<cr>|
+                \ let g:go_fmt_command = "goimports"|
+                \ let g:go_list_type = "quickfix"|
+                \ let g:go_highlight_types = 1|
+                \ let g:go_highlight_fields = 1|
+                \ let g:go_highlight_functions = 1|
+                \ let g:go_highlight_methods = 1|
+                \ let g:go_highlight_operators = 1|
+                \ let g:go_highlight_build_constraints = 1|
+                \ let g:go_highlight_generate_tags = 1|
+                \ let g:go_gocode_propose_builtins = 1|
+                \ let g:go_gocode_unimported_packages = 1|
+                \ command! -bang A call go#alternate#Switch(<bang>0, 'edit')|
+                \ command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')|
+                \ command! -bang AS call go#alternate#Switch(<bang>0, 'split')|
+                "\ let g:go_auto_type_info = 1|
+                "\ let g:go_updatetime = 100|
+                "\ let g:go_auto_sameids = 1|
+                "\ let g:go_play_open_browser = 1|
+augroup END
+" }}} vim-go "
+
+" vim-rust {{{ "
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+augroup rust_env
+    autocmd!
+    autocmd FileType rust
+                \ nmap <silent> <c-]> <Plug>(coc-definition)|
+                \ nmap <buffer> <leader>r<CR> :VT cargo run -q<CR>|
+                \ nmap <buffer> <leader>t<CR> :VT cargo test -q<CR>|
+                \ nmap <buffer> <leader>b<CR> :VT cargo build -q<CR>|
+                \ nmap <buffer> <leader>r<CR> :VT cargo play %<CR>
+augroup END
+" }}} vim-rust "
+
+" vim-python {{{ "
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins',  'for': 'python'}
+let g:semshi#error_sign = v:false
+if !empty(glob('~/.pyenv/shims/python'))
+    let g:python3_host_prog = glob('~/.pyenv/shims/python')
+endif
+augroup python_env
+    autocmd!
+    autocmd FileType python
+                \ nmap <silent> <c-]> <Plug>(coc-definition)|
+                \ nmap <buffer> <leader>r<CR> :VT python %<CR>
+augroup END
+" }}} vim-rust "
+
+" vim-cpp {{{ "
+function! s:build_cpp_files(...)
+    let l:file = expand('%')
+    let l:base = expand('%:r')
+    exec 'VT' $CXX g:ale_cpp_clang_options l:file '-o' l:base join(a:000, ' ')
+endfunction
+augroup cpp_env
+    autocmd!
+    autocmd FileType cpp
+                \ nmap <buffer> <silent> <leader>r<CR> :call <SID>build_cpp_files('&& ./' . expand('%:r'))<CR>|
+                \ nmap <buffer> <silent> <leader>b<CR> :call <SID>build_cpp_files()<CR>
+augroup END
+" }}} vim-cpp "
+
+" clojure {{{ "
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace',     { 'for': 'clojure' }
+Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
+Plug 'luochen1990/rainbow',     { 'for': 'clojure' }
+let g:rainbow_active = 1
+" Plug 'venantius/vim-cljfmt', { 'for': 'clojure' }
+" Plug 'junegunn/rainbow_parentheses.vim'
+augroup clojure_env
+    autocmd!
+    autocmd FileType clojure
+                \ nmap <buffer> <silent> <c-l> <leader>>|
+                \ nmap <buffer> <silent> <c-h> <leader><|
+                \ silent! nunmap <c-l><c-l>|
+                \ silent! nunmap <c-h><c-h>
+augroup END
+" }}} clojure "
+
+Plug 'dhruvasagar/vim-table-mode', { 'for': 'markdown' }
+augroup vim_table_mode
+    autocmd!
+    autocmd VimEnter *.md silent! TableModeEnable
+augroup END
+
+" Syntax highlight: sheerun/vim-polyglot {{{ "
+" Need to be loaded after vim-go(https://github.com/fatih/vim-go/issues/2272)
+Plug 'sheerun/vim-polyglot'
+let g:polyglot_disabled = ['markdown'] " cause coc-emoji complete not triggered
+Plug 'wfxr/dockerfile.vim' | let g:polyglot_disabled += ['dockerfile']
+Plug 'wfxr/protobuf.vim'   | let g:polyglot_disabled += ['protobuf'] " error indent when press ':'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+Plug 'andrewstuart/vim-kubernetes'
+Plug 'nelstrom/vim-textobj-rubyblock'
+" Plug 'ap/vim-css-color', { 'for': 'css' } " buggy and slow
+" Plug 'tmux-plugins/vim-tmux',            { 'for': 'tmux'       }
+" Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp'        }
+" Plug 'moll/vim-node',                    { 'for': 'node'       }
+" Plug 'mattn/emmet-vim',                  { 'for': 'html'       }
+" Plug 'othree/xml.vim',                   { 'for': 'xml'        }
+" Plug 'elzr/vim-json',                    { 'for': 'json'       }
+" Plug 'cespare/vim-toml',                 { 'for': 'toml'       }
+" Plug 'pangloss/vim-javascript',          { 'for': 'javascript' }
+" Plug 'martinda/Jenkinsfile-vim-syntax',  { 'for': 'jenkins'    }
+" Plug 'udalov/kotlin-vim',                { 'for': 'kotlin'     }
+" Plug 'vim-ruby/vim-ruby',                { 'for': 'ruby'       }
+" Plug 'tpope/vim-bundler',                { 'for': 'ruby'       }
+" Plug 'tpope/vim-rake',                   { 'for': 'ruby'       }
+" Plug 'jgdavey/vim-blockle',              { 'for': 'ruby'       } | let g:blockle_mapping = '<leader>B'
+" Plug 'stephpy/vim-yaml',                 { 'for': 'yaml'       }
+" Plug 'chr4/nginx.vim',                   { 'for': 'conf'       }
+" }}} sheerun/vim-polyglot "
+
+call plug#end()
+
+" Custom functions {{{ "
+" Open repo in browser
+function! s:go_github()
+    let s:repo = matchstr(expand('<cWORD>'), '\v[0-9A-Za-z\-\.\_]+/[0-9A-Za-z\-\.\_]+')
+    if empty(s:repo)
+        echo 'GoGithub: No repository found.'
+    else
+        let s:url = 'https://github.com/' . s:repo
+        call netrw#BrowseX(s:url, 0)
+    end
+endfunction
+augroup gogithub
+    au!
+    au FileType *vim,*zsh,*bash,*tmux nnoremap <buffer> <silent> <cr> :call <sid>go_github()<cr>
+augroup END
+" }}} Custom functions "
+
+" vim-plug extension {{{ "
+" Define some custom command
+command! PU source ~/.vim_plug | PlugUpgrade | PlugUpdate
+command! PI source ~/.vim_plug | PlugInstall
+command! PC source ~/.vim_plug | PlugClean
+
+" VimAwesome complete for vim-plug
+" function! VimAwesomeComplete() abort
+    " let prefix = matchstr(strpart(getline('.'), 0, col('.') - 1), '[.a-zA-Z0-9_/-]*$')
+    " echohl WarningMsg
+    " echo 'Downloading plugin list from VimAwesome'
+    " echohl None
+    " ruby << EOF
+    " require 'json'
+    " require 'open-uri'
+"
+    " query = VIM::evaluate('prefix').gsub('/', '%20')
+    " items = 1.upto(max_pages = 3).map do |page|
+    " Thread.new do
+    " url  = "http://vimawesome.com/api/plugins?page=#{page}&query=#{query}"
+    " data = open(url).read
+    " json = JSON.parse(data, symbolize_names: true)
+    " json[:plugins].map do |info|
+    " pair = info.values_at :github_owner, :github_repo_name
+    " next if pair.any? { |e| e.nil? || e.empty? }
+    " {word: pair.join('/'),
+    " menu: info[:category].to_s,
+    " info: info.values_at(:short_desc, :author).compact.join($/)}
+" end.compact
+    " end
+" end.each(&:join).map(&:value).inject(:+)
+" VIM::command("let cands = #{JSON.dump items}")
+" EOF
+" if !empty(cands)
+    " inoremap <buffer> <c-v> <c-n>
+    " augroup _VimAwesomeComplete
+        " autocmd!
+        " autocmd CursorMovedI,InsertLeave * iunmap <buffer> <c-v>
+                    " \| autocmd! _VimAwesomeComplete
+    " augroup END
+"
+    " call complete(col('.') - strchars(prefix), cands)
+" endif
+" return ''
+" endfunction
+
+" augroup PlugExtension
+    " autocmd!
+    " autocmd FileType vim
+                " \ inoremap <buffer> <c-x><c-x> <c-r>=VimAwesomeComplete()<cr>|
+                " \ autocmd BufWritePost * source %
+" augroup END
+
+" }}} vim-plug extension "
+
+" rotate-colors {{{ "
+function! s:colors(...)
+    return filter(map(filter(split(globpath(&runtimepath, 'colors/*.vim'), "\n"),
+                \                  'v:val !~# "^/usr/"'),
+                \           'fnamemodify(v:val, ":t:r")'),
+                \       '!a:0 || stridx(v:val, a:1) >= 0')
+endfunction
+function! s:rotate_colors()
+    if !exists('s:colors')
+        let s:colors = s:colors()
+    endif
+    let name = remove(s:colors, 0)
+    call add(s:colors, name)
+    execute 'colorscheme' name
+    redraw
+    echo name
+endfunction
+nnoremap <silent> <F8> :call <SID>rotate_colors()<cr>
+" }}} rotate-colors "
+
+" Zoom {{{ "
+function! s:zoom()
+  if winnr('$') > 1
+    tab split
+  elseif len(filter(map(range(tabpagenr('$')), 'tabpagebuflist(v:val + 1)'),
+                  \ 'index(v:val, '.bufnr('').') >= 0')) > 1
+    tabclose
+  endif
+endfunction
+nnoremap <silent> <c-w><c-w> :call <sid>zoom()<cr>
+" }}} Zoom "
+
+" Execute current buffer {{{ "
+function! s:execute_buffer()
+    if !empty(expand('%'))
+        write
+        call system('chmod +x '.expand('%'))
+        silent e
+        vsplit | terminal ./%
+    else
+        echohl WarningMsg
+        echo 'Save the file first'
+        echohl None
+    endif
+endfunction
+command! RUN :call s:execute_buffer()
+augroup execute_buffer
+    au!
+    au FileType sh,bash,zsh,python,ruby nnoremap <leader>rr :RUN<cr>
+augroup END
+" }}} Execute script "
+
+" Obsoleted {{{ "
+"Plug 'vim-scripts/taglist.vim'
+"let Tlist_Exit_OnlyWindow=1
+"let Tlist_Auto_Open=0
+"nmap <leader>tl :TlistToggle<CR>
+"Plug 'vim-scripts/a.vim'
+"nmap <leader>aa :A<CR>
+"nmap <leader>as :AS<CR>
+"Plug 'wfxr/BufferSwitch'
+"Plug 'quickfix/quickfix'
+" Plug 'junegunn/vim-emoji'
+" augroup emoji_complete
+    " autocmd!
+    " autocmd FileType markdown,gitcommit setlocal completefunc=emoji#complete
+" augroup END
+"Plug 'osyo-manga/vim-over'
+"Plug 'jeaye/color_coded' " C-family语法高亮 TODO need lua, no nvim support
+"Plug 'suan/vim-instant-markdown',      { 'for': 'markdown'   }
+"let g:instant_markdown_autostart = 0
+"Plug 'takac/vim-hardtime'
+"let g:hardtime_default_on = 0
+"Plug 'wfxr/logstash.vim'
+"Plug 'ctrlpvim/ctrlp.vim' | let g:ctrlp_working_path_mode = 'ra'
+"Plug 'reedes/vim-pencil'
+"Plug 'kana/vim-textobj-function'
+"Plug 'sgur/vim-textobj-parameter'
+"if !has('macunix')
+    "Plug 'lilydjwg/fcitx.vim'
+"endif
+
+" vim-easymotion {{{ "
+" Plug 'easymotion/vim-easymotion'
+" let g:EasyMotion_smartcase = 1
+" nmap <Leader>f <Plug>(easymotion-overwin-f)
+" nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" nmap <Leader>l <Plug>(easymotion-overwin-line)
+" nmap <Leader>w <Plug>(easymotion-overwin-w)
+" }}} vim-easymotion "
+
+" }}}  "
+
+
